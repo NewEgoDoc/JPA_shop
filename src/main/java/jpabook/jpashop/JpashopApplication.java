@@ -11,7 +11,7 @@ public class JpashopApplication {
 		Hello hello = new Hello();
 		hello.setData("hello");
 		String data = hello.getData();
-		
+
 		SpringApplication.run(JpashopApplication.class, args);
 	}
 
