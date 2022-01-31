@@ -1,6 +1,7 @@
 package jpabook.jpashop.repository;
 
 import jpabook.jpashop.domain.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -10,15 +11,23 @@ import javax.persistence.PersistenceUnit;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class MemberRepository {
-
-    @PersistenceContext
-    private EntityManager em;
 
     /* 이렇게 entity manager factory를 주입 해줄수 있다.
     @PersistenceUnit
     private EntityManagerFactory emf;
     */
+
+    /*
+    @PersistenceContext -> @Autowired 변경 가능
+    변경 가능한 이유는 spring boot library가 가능하게 해주는 것이지 다른데에서 모두 가능한것이 아니다 이게 가능하기에
+    @RequiredArgsConstructor로 변경이 가능한 것이다!
+    private EntityManager em;
+    */
+    private final EntityManager em;
+
+
     public void save(Member member){
         em.persist(member);
     }
