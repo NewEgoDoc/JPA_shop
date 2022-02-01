@@ -13,7 +13,6 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class MemberRepository {
-
     /* 이렇게 entity manager factory를 주입 해줄수 있다.
     @PersistenceUnit
     private EntityManagerFactory emf;
@@ -27,12 +26,11 @@ public class MemberRepository {
     */
     private final EntityManager em;
 
-
     public void save(Member member){
         em.persist(member);
     }
 
-    public Member find(Long id){
+    public Member findOne(Long id){
         return em.find(Member.class, id);
     }
 

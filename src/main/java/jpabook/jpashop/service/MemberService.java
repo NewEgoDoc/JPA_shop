@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-//@Transactional // 이게 있어야 트랜젝션 안에서 데이터 변경이 일어나기 때문에 반드시 필요
+@Transactional // 이게 있어야 트랜젝션 안에서 데이터 변경이 일어나기 때문에 반드시 필요
 @RequiredArgsConstructor// 필드만 가지고 생성자 생성
 public class MemberService {
 
@@ -57,6 +57,6 @@ public class MemberService {
 
     @Transactional(readOnly = true)
     public Member findOne(Long memberId){
-        return memberRepository.find(memberId);
+        return memberRepository.findOne(memberId);
     }
 }
