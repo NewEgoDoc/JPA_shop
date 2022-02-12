@@ -22,6 +22,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.6.2'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.6.2'
 	implementation 'org.springframework.boot:spring-boot-starter-web:2.6.2'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'//이거 왜 없지? ㅡㅡ
+
 	implementation 'org.springframework.boot:spring-boot-devtools:2.6.2'
 	implementation 'junit:junit:4.13.2'
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0'
