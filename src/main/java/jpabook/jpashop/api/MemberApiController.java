@@ -6,12 +6,11 @@ import jpabook.jpashop.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController//@Controller @ResponseBody
 @RequiredArgsConstructor
@@ -22,6 +21,21 @@ public class MemberApiController {
     @GetMapping("/api/v1/members")
     public List<Member> membersV1(){
         return memberService.findMembers();
+    }
+
+    @GetMapping("/api/v2/members")
+    public Result membersV2(){
+        List<Member> findMembers = memberService.findMembers();
+        List<MemberDTO> collect = findMembers.stream()
+                .map(m -> new MemberDTO((m.getName())))
+                .collect(Collectors.toList());
+        return new Result(collect);
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class Result<T>{
+        private T data;
     }
 
     @PostMapping("/api/v1/members")
@@ -49,6 +63,15 @@ public class MemberApiController {
         memberService.update(id, request.getName());
         Member findMember = memberService.findOne(id);
         return new UpdateMemberResponse(findMember.getId(), findMember.getName());
+    }
+
+
+
+
+    @Data
+    @AllArgsConstructor
+    static class MemberDTO {
+        private String name;
     }
 
     @Data
