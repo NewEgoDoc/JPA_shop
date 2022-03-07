@@ -95,4 +95,16 @@ public class OrderRepository {
     }
 
 
+    public List<Order> findAllWithItem() {//일대다 패치 조인에서는 페이징을 하면 안됨
+        //일대다 패치조인은 1개만 사용해야한다!
+        return em.createQuery( //distinct jpa는 중복값이 오면 하나를 버림 기준이 객체 레퍼런스가 됨
+                "select distinct o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d" +
+                        " join fetch o.orderItems oi" +
+                        " join fetch oi.item i", Order.class)
+                .setFirstResult(1)
+                .setMaxResults(100)
+                .getResultList();
+    }
 }
