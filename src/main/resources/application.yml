@@ -19,6 +19,7 @@ spring:
     properties:
       hiberante:
         format_sql: true
+        default_batch_fetch_size: 100
     show-sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect

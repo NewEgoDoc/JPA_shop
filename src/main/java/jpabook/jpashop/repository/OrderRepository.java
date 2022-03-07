@@ -94,6 +94,15 @@ public class OrderRepository {
                 .getResultList();
     }
 
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery("select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
 
     public List<Order> findAllWithItem() {//일대다 패치 조인에서는 페이징을 하면 안됨
         //일대다 패치조인은 1개만 사용해야한다!
@@ -108,3 +117,4 @@ public class OrderRepository {
                 .getResultList();
     }
 }
+
